@@ -1,5 +1,5 @@
 from flask import Flask, redirect, render_template, request, url_for
-
+from dao.vehicle import Vehicle
 
 app = Flask(__name__)
 
@@ -9,11 +9,13 @@ def open_vehicle():
 
 @app.route('/vehicle', methods=['POST'])
 def save_vehicle():
-    vehicle_plate = request.form['vehicle_plate']
-    owner = request.form['owner']
-    model = request.form['model']
-    brand = request.form['brand']
-    year = request.form['year']
+    
+    vehicle = Vehicle()
+    vehicle.vehicle_plate = request.form['vehicle_plate']
+    vehicle.owner = request.form['owner']
+    vehicle.model = request.form['model']
+    vehicle.brand = request.form['brand']
+    vehicle.year = request.form['year']
     return redirect(url_for('open_vehicle'))
 
 
